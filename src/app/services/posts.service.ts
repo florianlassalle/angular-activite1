@@ -30,6 +30,12 @@ export class PostsService {
     return post;
   }
 
+  deletePost(id: number){
+    const post = this.getPostById(id);
+    this.posts.splice(this.posts.indexOf(post));
+    this.emitAppareilSubject();
+  }
+
   emitAppareilSubject(){
     this.postsSubject.next(this.posts.slice());
   }

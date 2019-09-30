@@ -1,6 +1,7 @@
 <h2>Mes posts</h2>
   <ul class="list-group">
     <app-post-list-item *ngFor="let post of postList"
+                      [postId]="post.id"
                       [postTitle]="post.title" 
                       [postContent]="post.content"
                       [postDate]="post.creationDate"

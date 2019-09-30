@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { PostsService } from '../services/posts.service';
 
 @Component({
   selector: 'app-post-list-item',
@@ -7,13 +8,14 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class PostListItemComponent implements OnInit {
 
+  @Input() postId: number;
   @Input() likeCount: number;
 
   @Input() postTitle : string;
   @Input() postContent : string;
   @Input() postDate : Date;
 
-  constructor() { }
+  constructor(private postsService: PostsService) { }
 
   ngOnInit() {
   }
@@ -28,6 +30,11 @@ export class PostListItemComponent implements OnInit {
 
   getLikeCount(){
     return this.likeCount;
+  }
+
+  onDelete(){
+    this.postsService.deletePost(this.postId);
+
   }
 
   getColor(){
