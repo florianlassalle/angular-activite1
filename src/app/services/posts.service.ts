@@ -15,11 +15,13 @@ export class PostsService {
 
   constructor() { }
 
-  addPost(id: number, title: string, content: string, likes: number){
-    
-    this.posts.push(new Post(id, title, content, likes));
+  addPost(title: string, content: string){
+    const id = this.posts.length;
+    this.posts.push(new Post(id, title, content, 0));
     this.emitAppareilSubject();
   }
+
+  
 
   getPostById(id: number){
     const post = this.posts.find(
