@@ -1,19 +1,32 @@
-import { Component } from '@angular/core';
-import {Post} from './models/post';
+import { Component, OnInit } from '@angular/core';
+import {Post} from './models/post.model';
+import { Subscription } from 'rxjs/Subscription';
+import { PostsService } from './services/posts.service';
+
 
 @Component({
   selector: 'my-app',
   templateUrl: './app.component.html',
   styleUrls: [ './app.component.css' ]
 })
-export class AppComponent  {
+export class AppComponent  implements OnInit{
   name = 'Angular';
 
+  posts: Post[];
+  postSubscription: Subscription;
 
-   posts = [
-    new Post('Mon premier post', "blabalabla", 10 ),
-    new Post('Mon deuxième post', "blabalabla", -5 ),
-    new Post('Mon troisième post', "blabalabla", 0 )
-  ];
+  constructor(private postsService: PostsService){
+
+  }
+
+  ngOnInit(){
+    this.postSubscription = this.postsService.postsSubject.subscribe(
+      (posts: Post[]) => {
+        this.posts = posts;
+      }
+    )
+    this.postsService.emitAppareilSubject();
+  }
+  
 
 }

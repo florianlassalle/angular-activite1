@@ -1,12 +1,14 @@
 export class Post {
 
+  id: number;
   title : string;
   content: string;
   likes: number;
   creationDate : Date;
 
-  constructor(title: string, content: string, likes: number){
+  constructor(id: number, title: string, content: string, likes: number){
 
+    this.id = id;
     this.title = title;
     this.content = content;
     this.likes = likes;
