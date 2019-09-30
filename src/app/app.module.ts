@@ -10,6 +10,7 @@ import { PostsService } from './services/posts.service';
 import { NewPostComponent } from './new-post/new-post.component';
 import { Routes } from '@angular/router';
 import { RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -21,7 +22,7 @@ const appRoutes: Routes = [
 ];
 
 @NgModule({
-  imports:      [ BrowserModule, FormsModule, ReactiveFormsModule, RouterModule.forRoot(appRoutes) ],
+  imports:      [ BrowserModule, FormsModule, ReactiveFormsModule, HttpClientModule,RouterModule.forRoot(appRoutes) ],
   declarations: [ AppComponent, HelloComponent, PostListItemComponent, PostListComponent, NewPostComponent ],
   bootstrap:    [ AppComponent ],
   providers: [PostsService]

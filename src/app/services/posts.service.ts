@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Post } from '../models/post.model';
 import { Subject } from 'rxjs/Subject';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class PostsService {
@@ -13,7 +14,7 @@ export class PostsService {
     new Post(2, 'Mon troisième post', "blabalabla", 0 )
   ];
 
-  constructor() { }
+  constructor(private httpClient: HttpClient) { }
 
   addPost(title: string, content: string){
     const id = this.posts.length;
@@ -41,4 +42,32 @@ export class PostsService {
   emitAppareilSubject(){
     this.postsSubject.next(this.posts.slice());
   }
+
+    savePostsToServer() {
+    this.httpClient
+      .put('https://cours-angular-34d6e.firebaseio.com/posts.json', this.posts)
+      .subscribe(
+        () => {
+          console.log('Enregistrement terminé !');
+        },
+        (error) => {
+          console.log('Erreur ! : ' + error);
+        }
+      );
+  }
+
+  getPostsFromServer() {
+    this.httpClient
+      .get<any[]>('https://cours-angular-34d6e.firebaseio.com/posts.json')
+      .subscribe(
+        (response) => {
+          this.posts = response;
+          this.emitAppareilSubject();
+        },
+        (error) => {
+          console.log('Erreur ! : ' + error);
+        }
+      );
+}
+
 }

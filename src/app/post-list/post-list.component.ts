@@ -27,5 +27,12 @@ export class PostListComponent implements OnInit {
     this.postsService.emitAppareilSubject();
   }
 
+  onSave(){
+    this.postsService.savePostsToServer();
+  }
+
+  onFetch(){
+    this.postsService.getPostsFromServer();
+  }
 
 }

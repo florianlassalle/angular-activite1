@@ -3,7 +3,7 @@
                 'list-group-item-danger': getColor() === 'red'}">
   <div class="row">
 	  <h4 [ngStyle]="{color: getColor()}">{{ postTitle }}</h4>
-    <div class="col text-right">{{ postDate | date: 'short' }}</div> 
+    <div class="col text-right">{{ postDate | date: 'EEEE d/MM/y H;m' }}</div> 
    </div>
 	<p> {{ postContent }} </p>
 	<button class="btn btn-success" 
