@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { PostsService } from '../services/posts.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-post',
@@ -11,7 +12,7 @@ export class NewPostComponent implements OnInit {
 
   postForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private postsService: PostsService) { }
+  constructor(private formBuilder: FormBuilder, private postsService: PostsService, private router: Router) { }
 
   ngOnInit() {
     this.initForm();
@@ -27,7 +28,7 @@ export class NewPostComponent implements OnInit {
   onSubmitForm(){
     const formValue = this.postForm.value;
     this.postsService.addPost(formValue['title'], formValue['content']);
-  
+    this.router.navigate(['/posts']);
     
   }
 }
